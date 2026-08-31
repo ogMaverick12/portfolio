@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <script>
+      // Safe environment shim for sandboxed iframes & fetch property handlers
+      (function () {
+        if (typeof window === 'undefined') return;
+
+        try {
+          var originalFetch = window.fetch;
+          var customFetch = originalFetch;
+
+          function installFetchProperty(obj) {
+            if (!obj) return;
+            try {
+              var descriptor = Object.getOwnPropertyDescriptor(obj, 'fetch');
+              if (!descriptor || descriptor.configurable) {
+                Object.defineProperty(obj, 'fetch', {
+                  get: function () {
+                    return customFetch || originalFetch;
+                  },
+                  set: function (fn) {
+                    customFetch = fn;
+                  },
+                  configurable: true,
+                  enumerable: true,
+                });
+              }
+            } catch (e) {}
+          }
+
+          installFetchProperty(window);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            installFetchProperty(Window.prototype);
+          }
+        } catch (e) {}
+
+        // Global safety error listeners
+        window.addEventListener(
+          'error',
+          function (e) {
+            var msg = e && (e.message || (e.error && e.error.message));
+            if (typeof msg === 'string' && msg.includes('fetch') && msg.includes('getter')) {
+              e.preventDefault();
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+              return true;
+            }
+          },
+          true
+        );
+
+        window.addEventListener(
+          'unhandledrejection',
+          function (e) {
+            var msg = e && e.reason && (e.reason.message || String(e.reason));
+            if (typeof msg === 'string' && msg.includes('fetch') && msg.includes('getter')) {
+              e.preventDefault();
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sreejit Pradhan · AI Systems & Competitive Programming</title>
+    <meta name="description" content="16 y/o self-taught programmer building offline edge AI and competitive programming algorithms in Python & C++." />
+    <meta property="og:title" content="Sreejit Pradhan · Systems & AI Portfolio" />
+    <meta property="og:description" content="Explore flagship projects including SoilSense AI, PathForge AI, and PrepPilot with interactive simulations." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#0F0F0F] text-[#E8E4D9] antialiased selection:bg-[#F27D26] selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

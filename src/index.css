@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #0D0E12;
+    --bg-secondary: #14151C;
+    --bg-tertiary: #1C1E27;
+    --bg-card: rgba(19, 20, 28, 0.88);
+    --border-subtle: rgba(245, 235, 225, 0.08);
+    --border-bright: rgba(255, 75, 38, 0.45);
+    --text-primary: #F3EFE9;
+    --text-muted: #A19B90;
+    --text-dim: #6B655D;
+    --accent-neon: #FF4D26;
+    --accent-red: #E63946;
+    --accent-orange: #FF7034;
+    --accent-amber: #F59E0B;
+    --accent-cyan: #F3EFE9;
+    --accent-purple: #E07A5F;
+    --glow-color: rgba(255, 77, 38, 0.18);
+    --font-serif: "Newsreader", Georgia, serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  [data-theme="cyber-crimson"] {
+    --accent-neon: #E63946;
+    --accent-orange: #FF4D26;
+    --border-bright: rgba(230, 57, 70, 0.5);
+    --glow-color: rgba(230, 57, 70, 0.2);
+  }
+
+  [data-theme="cyber-amber"] {
+    --accent-neon: #F59E0B;
+    --accent-orange: #FF7034;
+    --border-bright: rgba(245, 158, 11, 0.45);
+    --glow-color: rgba(245, 158, 11, 0.18);
+  }
+
+  [data-theme="cyber-emerald"] {
+    --accent-neon: #10B981;
+    --border-bright: rgba(16, 185, 129, 0.45);
+    --glow-color: rgba(16, 185, 129, 0.18);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #F8F6F2;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #EDE8DF;
+    --bg-card: rgba(255, 255, 255, 0.94);
+    --border-subtle: rgba(20, 20, 20, 0.08);
+    --border-bright: rgba(255, 77, 38, 0.45);
+    --text-primary: #121214;
+    --text-muted: #5E5B54;
+    --text-dim: #8E8A81;
+    --accent-neon: #E0401B;
+    --accent-orange: #F26A2E;
+    --accent-cyan: #121214;
+    --glow-color: rgba(224, 64, 27, 0.14);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Editorial Aesthetic Utilities */
+.serif {
+  font-family: var(--font-serif);
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-code {
+  font-family: var(--font-mono);
+}
+
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+
+.grid-divider {
+  border-color: rgba(232, 228, 217, 0.1);
+}
+
+/* Custom Glass & Editorial Effects */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Interactive Text-Only Glitch Styling */
+.glitch-text-interactive {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--font-serif);
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: var(--text-primary);
+  text-shadow: 0 0 1px rgba(255, 77, 38, 0.2);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.glitch-text-interactive:hover {
+  color: var(--accent-neon);
+  text-shadow: 
+    -0.8px 0 rgba(230, 57, 70, 0.65),
+    0.8px 0 rgba(56, 189, 248, 0.55),
+    0 0 8px rgba(255, 77, 38, 0.3);
+  animation: glitch-name-subtle 1.2s infinite ease-in-out;
+}
+
+.glitch-text-interactive:hover::before,
+.glitch-text-interactive:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  pointer-events: none;
+  opacity: 0.75;
+  will-change: transform, opacity, clip-path;
+}
+
+.glitch-text-interactive:hover::before {
+  left: -1px;
+  text-shadow: -1px 0 #E63946;
+  clip-path: polygon(0 15%, 100% 15%, 100% 45%, 0 45%);
+  animation: glitch-anim-subtle-1 0.75s infinite linear alternate-reverse;
+}
+
+.glitch-text-interactive:hover::after {
+  left: 1px;
+  text-shadow: 1px 0 #38BDF8;
+  clip-path: polygon(0 55%, 100% 55%, 100% 85%, 0 85%);
+  animation: glitch-anim-subtle-2 0.85s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-name-subtle {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-0.4px, 0.2px); }
+  50% { transform: translate(0.3px, -0.2px); }
+  75% { transform: translate(-0.2px, -0.2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes glitch-anim-subtle-1 {
+  0% { transform: translate(0); clip-path: polygon(0 12%, 100% 12%, 100% 42%, 0 42%); }
+  50% { transform: translate(-0.6px, 0.3px); clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%); }
+  100% { transform: translate(0.5px, -0.3px); clip-path: polygon(0 15%, 100% 15%, 100% 45%, 0 45%); }
+}
+
+@keyframes glitch-anim-subtle-2 {
+  0% { transform: translate(0); clip-path: polygon(0 58%, 100% 58%, 100% 88%, 0 88%); }
+  50% { transform: translate(0.6px, -0.3px); clip-path: polygon(0 48%, 100% 48%, 100% 78%, 0 78%); }
+  100% { transform: translate(-0.5px, 0.3px); clip-path: polygon(0 55%, 100% 55%, 100% 85%, 0 85%); }
+}
+
+/* GPU Layer Performance Promotion for Smooth 60fps Animations */
+.hero-stagger,
+.hero-title-word,
+.flagship-header-item,
+.project-card-tab,
+.project-content-panel,
+.domain-detail-box,
+.anime-stagger-item {
+  will-change: transform, opacity;
+}
+
+.hero-status-pulse,
+.telemetry-radar-circle,
+.theme-transition-wipe,
+.card-light-sheen {
+  will-change: transform, opacity;
+}
+
+.telemetry-eq-bar,
+.hero-draggable-chip,
+.anime-draggable-badge {
+  will-change: transform;
+}
+
+.diagnostic-progress-bar {
+  will-change: width, transform;
+}
+
+/* Editorial Grid Overlay */
+.cyber-grid {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(232, 228, 217, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(232, 228, 217, 0.025) 1px, transparent 1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 228, 217, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-neon);
+}
+
+/* Anime.js Target Classes */
+.anime-stagger-item {
+  will-change: transform, opacity;
+}
+
+.anime-draggable-badge {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.anime-draggable-badge:active {
+  cursor: grabbing;
+}
+

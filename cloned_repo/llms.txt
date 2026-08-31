@@ -1,0 +1,17 @@
+# Sreejit Pradhan
+
+> 16-year-old self-taught programmer learning Python & C++ for competitive programming.
+
+## About
+Sreejit Pradhan is a student at DPS Siliguri (Grade 11) who is teaching himself code. He focuses on learning algorithmic logic, time complexity analysis, and standard data structures in C++ and Python for competitive programming.
+
+## Skills
+Python · C++ · Algorithms · Math · Competitive Programming · Logic · Basic Data Structures
+
+## Projects
+- **SoilSense AI** — Offline farm intelligence running Gemma 4 on a Raspberry Pi. Real-time soil analysis and crop recommendations with zero internet required. https://github.com/ogMaverick12
+- **PathForge AI** — AI-powered career roadmap generator built for IBM's hackathon using IBM Granite. https://github.com/ogMaverick12
+- **PrepPilot** — Adaptive AI interview & exam prep that learns from weak spots. https://github.com/ogMaverick12
+
+## Links
+- Portfolio: https://sreejitdev.vercel.app/
